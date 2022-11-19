@@ -2,6 +2,7 @@ package guru.qa.allure.notifications.util;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
 
 public class ResourcesUtil {
     public String resourcesPath(String path) {
@@ -9,7 +10,7 @@ public class ResourcesUtil {
         URL res = getClass().getResource(path);
         if ("jar".equals(res.getProtocol())) {
             try (InputStream input = getClass().getResourceAsStream(path)) {
-                file = File.createTempFile("tempfile", ".tmp");
+                file = Files.createTempFile("tempfile", ".tmp").toFile();
                 try (OutputStream out = new FileOutputStream(file)) {
                     int read;
                     byte[] bytes = new byte[1024];
